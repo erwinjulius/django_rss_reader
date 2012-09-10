@@ -1,0 +1,20 @@
+
+{% if qrystr != "" %}
+	
+			<span id="date_news"><a onclick='history.back()'  ><img src="{{MEDIA_URL}}imagens/bt_voltar.jpg"></a></span>
+			<span id="date_news">{{ news_date}}</span>
+			<span id="title_news">{{ news_title }} </span>
+			<span id="content_news">{{ news_content|safe }}</span>
+			
+{% else %}
+
+	<ul id="lista_news">
+	{% for o in entries %}
+		<li id="item_news">
+		  <span id="date_news">{{ o.updated_parsed.tm_mday }}/{{ o.updated_parsed.tm_mon }}/{{o.updated_parsed.tm_year}} {{o.updated_parsed.tm_hour}}:{{o.updated_parsed.tm_min}}</span>
+		  <span id="title_news">{{ o.title }}</span>
+		  <span id="link_news"><a href="?entry={{ o.link|cut:"http://news.santacruzfc-pe.com.br/index.php/"|cut:"/"  }}"><img src="{{MEDIA_URL}}imagens/bt_leiaMais.jpg"></a></span>
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}
